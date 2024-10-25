@@ -6,7 +6,7 @@ export default function Search(props) {
         <>
             {
                 openSearch ? (
-                    <div className="z-10 top-0 left-0 m-0 p-0 bg-slate-800 absolute w-full h-screen">
+                    <div className="z-10 top-0 left-0 m-0 p-0 bg-slate-800 absolute w-full md:w-[30%] h-screen">
                         <div className="w-full px-5 py-2 flex flex-col gap-2 text-white">
                             <button
                                 className="self-end mt-4 mb-3"

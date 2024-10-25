@@ -1,6 +1,8 @@
 'use client'
 import React, { useState } from 'react'
 import Search from '../components/Search'
+import { geoFindMe } from './geolocation'
+
 
 function Main() {
     const [openSearch, setOpenSearch] = useState(false)
@@ -16,7 +18,7 @@ function Main() {
                     <button className='h-8 text-white text-xs bg-slate-400 px-4'
                         onClick={() => setOpenSearch(true)}
                     >Search for places</button>
-                    <button className='h-8 text-white rounded-full text-sm bg-slate-400 p-1'>
+                    <button className='h-8 text-white rounded-full text-sm bg-slate-400 p-1' onClick={geoFindMe}>
                         <img className="h-full w-auto" src="/location.svg" alt="" /></button>
                 </div>
                 <div className='relative'>
@@ -91,10 +93,30 @@ function Main() {
                         <div className='flex flex-col gap-3 py-4 items-center h-40 bg-slate-800'>
                             <h2 className='text-xs'>Wind status</h2>
                             <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> ms</span></h3>
+                            <div className='flex items-center gap-2'>
+                                <div className='h-8 w-8 bg-gray-600 rounded-full'>
+                                    <img className='p-1 rotate-45' src="navigation.svg" alt="" />
+                                </div>
+                                <span>SSE</span>
+
+                            </div>
                         </div>
                         <div className='flex flex-col gap-3 py-4 items-center h-40 bg-slate-800'>
                             <h2 className='text-xs'>Humidity</h2>
                             <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> %</span></h3>
+                            <div className="w-full px-8">
+                                <div className="w-full flex justify-between">
+                                    <span className="text-xs font-light">0</span>
+                                    <span className="text-xs font-light">50</span>
+                                    <span className="text-xs font-light">100</span>
+                                </div>
+                                <div className="w-full bg-gray-200 rounded-full h-2">
+                                    <div className="bg-yellow-400 h-2 rounded-full" style={{ width: '35%' }}></div>
+                                </div>
+                                <div className="w-full flex justify-end">
+                                    <span className="text-xs font-light">%</span>
+                                </div>
+                            </div>
                         </div>
                         <div className='flex flex-col gap-3 py-4 items-center h-32 bg-slate-800'>
                             <h2 className='text-xs'>Visibility</h2>
