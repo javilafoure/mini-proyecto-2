@@ -1,20 +1,34 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
+import Search from '../components/Search'
 
 function Main() {
+    const [openSearch, setOpenSearch] = useState(false)
+
     return (
         <div className='flex flex-col sm:flex-row w-screen h-screen'>
             <div className='flex flex-col w-full md:w-[30%] min-h-screen bg-slate-800'>
+                <Search
+                    openSearch={openSearch}
+                    setOpenSearch={setOpenSearch}
+                />
                 <div className='flex justify-between items-center h-20 px-10'>
-                    <button className='h-8 text-white text-xs bg-slate-400 px-4'>Search for places</button>
+                    <button className='h-8 text-white text-xs bg-slate-400 px-4'
+                        onClick={() => setOpenSearch(true)}
+                    >Search for places</button>
                     <button className='h-8 text-white rounded-full text-sm bg-slate-400 p-1'>
                         <img className="h-full w-auto" src="/location.svg" alt="" /></button>
                 </div>
-                <div>
-                    <img className='h-full' src="/others/Cloud-background.png" alt="" />
+                <div className='relative'>
+                    <img className='h-full opacity-10' src="/others/Cloud-background.png" alt="" />
+                    <img className='w-40 h-40 object-contain absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2' src="/weather/04n.png" alt="" />
                 </div>
                 <div className='flex flex-col items-center justify-center h-60 gap-8 mt-10'>
 
-                    <div className='flex text-slate-400 font-bold text-5xl'>temp</div>
+                    <div className='flex text-slate-400 font-bold text-5xl'>
+                        <h2 className="text-white text-9xl font-medium">20</h2>
+                        <h3 className="text-slate-400 text-7xl">°C</h3>
+                    </div>
                     <div className='flex text-slate-400 font-bold text-xl'>estado del clima</div>
                     <div className='flex text-slate-400 text-xs'>fecha</div>
                     <div className='flex text-slate-400 text-xs'>
@@ -74,22 +88,22 @@ function Main() {
                 <div className='flex flex-col w-full md:w-[65%] text-white md:mt-20 py-2 px-8 gap-4 bg-slate-950'>
                     <h2 className=' font-bold text-lg'>Today`s Highlights</h2>
                     <div className='flex flex-col md:grid md:grid-cols-2 gap-5'>
-                    <div className='flex flex-col gap-3 py-4 items-center h-40 bg-slate-800'>
-                        <h2 className='text-xs'>Wind status</h2>
-                        <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> ms</span></h3>
-                    </div>
-                    <div className='flex flex-col gap-3 py-4 items-center h-40 bg-slate-800'>
-                        <h2 className='text-xs'>Humidity</h2>
-                        <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> %</span></h3>
-                    </div>
-                    <div className='flex flex-col gap-3 py-4 items-center h-32 bg-slate-800'>
-                        <h2 className='text-xs'>Visibility</h2>
-                        <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> km</span></h3>
-                    </div>
-                    <div className='flex flex-col gap-3 py-4 items-center h-32 bg-slate-800'>
-                        <h2 className='text-xs'>Air Presure</h2>
-                        <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> mb</span></h3>
-                    </div>
+                        <div className='flex flex-col gap-3 py-4 items-center h-40 bg-slate-800'>
+                            <h2 className='text-xs'>Wind status</h2>
+                            <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> ms</span></h3>
+                        </div>
+                        <div className='flex flex-col gap-3 py-4 items-center h-40 bg-slate-800'>
+                            <h2 className='text-xs'>Humidity</h2>
+                            <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> %</span></h3>
+                        </div>
+                        <div className='flex flex-col gap-3 py-4 items-center h-32 bg-slate-800'>
+                            <h2 className='text-xs'>Visibility</h2>
+                            <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> km</span></h3>
+                        </div>
+                        <div className='flex flex-col gap-3 py-4 items-center h-32 bg-slate-800'>
+                            <h2 className='text-xs'>Air Presure</h2>
+                            <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> mb</span></h3>
+                        </div>
                     </div>
                 </div>
             </div>
