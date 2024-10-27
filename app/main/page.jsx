@@ -1,11 +1,16 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Search from '../components/Search'
 import { geoFindMe } from './geolocation'
 
-
 function Main() {
     const [openSearch, setOpenSearch] = useState(false)
+    const [ubicacion, setUbicacion] = useState({ ciudad: "", pais: "" });
+
+    useEffect(() => {
+        
+        geoFindMe(setUbicacion);
+    }, []);
 
     return (
         <div className='flex flex-col sm:flex-row w-screen h-screen'>
@@ -18,7 +23,7 @@ function Main() {
                     <button className='h-8 text-white text-xs bg-slate-400 px-4'
                         onClick={() => setOpenSearch(true)}
                     >Search for places</button>
-                    <button className='h-8 text-white rounded-full text-sm bg-slate-400 p-1' onClick={geoFindMe}>
+                    <button className='h-8 text-white rounded-full text-sm bg-slate-400 p-1' onClick={geoFindMe(setUbicacion)}>
                         <img className="h-full w-auto" src="/location.svg" alt="" /></button>
                 </div>
                 <div className='relative'>
@@ -35,7 +40,8 @@ function Main() {
                     <div className='flex text-slate-400 text-xs'>fecha</div>
                     <div className='flex text-slate-400 text-xs'>
                         <img className='h-4' src="/location_on.svg" alt="" />
-                        lugar</div>
+                        <h3> {ubicacion.ciudad}, {ubicacion.pais}</h3>
+                        </div>
 
                 </div>
             </div>
