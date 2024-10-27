@@ -5,11 +5,13 @@ import { geoFindMe } from './geolocation'
 
 function Main() {
     const [openSearch, setOpenSearch] = useState(false)
-    const [ubicacion, setUbicacion] = useState({ ciudad: "", pais: "" });
+    const [ubicacion, setUbicacion] = useState({ ciudad: "Haga click en el boton o busque una ubicacion", pais: "" });
 
     useEffect(() => {
         
-        geoFindMe(setUbicacion);
+        if (typeof window !== "undefined") {
+            geoFindMe(setUbicacion);
+        }
     }, []);
 
     return (
@@ -23,7 +25,7 @@ function Main() {
                     <button className='h-8 text-white text-xs bg-slate-400 px-4'
                         onClick={() => setOpenSearch(true)}
                     >Search for places</button>
-                    <button className='h-8 text-white rounded-full text-sm bg-slate-400 p-1' onClick={geoFindMe(setUbicacion)}>
+                    <button className='h-8 text-white rounded-full text-sm bg-slate-400 p-1' onClick={() => geoFindMe(setUbicacion)}>
                         <img className="h-full w-auto" src="/location.svg" alt="" /></button>
                 </div>
                 <div className='relative'>
