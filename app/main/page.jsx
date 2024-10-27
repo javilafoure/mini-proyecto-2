@@ -6,12 +6,18 @@ import { geoFindMe } from './geolocation'
 function Main() {
     const [openSearch, setOpenSearch] = useState(false)
     const [ubicacion, setUbicacion] = useState({ ciudad: "Haga click en el boton o busque una ubicacion", pais: "" });
+    const [fechaActual, setFechaActual] = useState('');
 
     useEffect(() => {
         
         if (typeof window !== "undefined") {
             geoFindMe(setUbicacion);
         }
+
+        const opciones = { weekday: 'short', day: '2-digit', month: 'short' };
+        const fecha = new Date().toLocaleDateString('en-US', opciones);
+        setFechaActual(fecha);
+
     }, []);
 
     return (
@@ -39,7 +45,7 @@ function Main() {
                         <h3 className="text-slate-400 text-7xl">°C</h3>
                     </div>
                     <div className='flex text-slate-400 font-bold text-xl'>estado del clima</div>
-                    <div className='flex text-slate-400 text-xs'>fecha</div>
+                    <div className='flex text-slate-400 text-xs'>Today .{fechaActual}</div>
                     <div className='flex text-slate-400 text-xs'>
                         <img className='h-4' src="/location_on.svg" alt="" />
                         <h3> {ubicacion.ciudad}, {ubicacion.pais}</h3>
