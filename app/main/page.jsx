@@ -36,15 +36,15 @@ function Main() {
                 </div>
                 <div className='relative'>
                     <img className='h-full opacity-10' src="/others/Cloud-background.png" alt="" />
-                    <img className='w-40 h-40 object-contain absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2' src="/weather/04n.png" alt="" />
+                    <img className='w-40 h-40 object-contain absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2' src={`/weather/${ubicacion.icon}.png`} alt="" />
                 </div>
                 <div className='flex flex-col items-center justify-center h-60 gap-8 mt-10'>
 
                     <div className='flex text-slate-400 font-bold text-5xl'>
-                        <h2 className="text-white text-9xl font-medium">20</h2>
+                        <h2 className="text-white text-9xl font-medium">{ubicacion.temp}</h2>
                         <h3 className="text-slate-400 text-7xl">°C</h3>
                     </div>
-                    <div className='flex text-slate-400 font-bold text-xl'>estado del clima</div>
+                    <div className='flex text-slate-400 font-bold text-xl'>{ubicacion.desc}</div>
                     <div className='flex text-slate-400 text-xs'>Today .{fechaActual}</div>
                     <div className='flex text-slate-400 text-xs'>
                         <img className='h-4' src="/location_on.svg" alt="" />
@@ -106,10 +106,10 @@ function Main() {
                     <div className='flex flex-col md:grid md:grid-cols-2 gap-5'>
                         <div className='flex flex-col gap-3 py-4 items-center h-40 bg-slate-800'>
                             <h2 className='text-xs'>Wind status</h2>
-                            <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> ms</span></h3>
+                            <h3 className='font-bold text-5xl'>{ubicacion.speed}<span className='font-normal text-3xl'> ms</span></h3>
                             <div className='flex items-center gap-2'>
                                 <div className='h-8 w-8 bg-gray-600 rounded-full'>
-                                    <img className='p-1 rotate-45' src="navigation.svg" alt="" />
+                                    <img className={`rotate-${ubicacion.deg} p-1`} src="navigation.svg" alt="" />
                                 </div>
                                 <span>SSE</span>
 
@@ -117,7 +117,7 @@ function Main() {
                         </div>
                         <div className='flex flex-col gap-3 py-4 items-center h-40 bg-slate-800'>
                             <h2 className='text-xs'>Humidity</h2>
-                            <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> %</span></h3>
+                            <h3 className='font-bold text-5xl'>{ubicacion.humidity}<span className='font-normal text-3xl'> %</span></h3>
                             <div className="w-full px-8">
                                 <div className="w-full flex justify-between">
                                     <span className="text-xs font-light">0</span>
@@ -125,7 +125,7 @@ function Main() {
                                     <span className="text-xs font-light">100</span>
                                 </div>
                                 <div className="w-full bg-gray-200 rounded-full h-2">
-                                    <div className="bg-yellow-400 h-2 rounded-full" style={{ width: '35%' }}></div>
+                                    <div className="bg-yellow-400 h-2 rounded-full" style={{ width: `${ubicacion.humidity}%` }}></div>
                                 </div>
                                 <div className="w-full flex justify-end">
                                     <span className="text-xs font-light">%</span>
@@ -134,11 +134,11 @@ function Main() {
                         </div>
                         <div className='flex flex-col gap-3 py-4 items-center h-32 bg-slate-800'>
                             <h2 className='text-xs'>Visibility</h2>
-                            <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> km</span></h3>
+                            <h3 className='font-bold text-5xl'>{ubicacion.visibility}<span className='font-normal text-3xl'> km</span></h3>
                         </div>
                         <div className='flex flex-col gap-3 py-4 items-center h-32 bg-slate-800'>
                             <h2 className='text-xs'>Air Presure</h2>
-                            <h3 className='font-bold text-5xl'>medidas<span className='font-normal text-3xl'> mb</span></h3>
+                            <h3 className='font-bold text-5xl'>{ubicacion.pressure}<span className='font-normal text-3xl'> mb</span></h3>
                         </div>
                     </div>
                 </div>

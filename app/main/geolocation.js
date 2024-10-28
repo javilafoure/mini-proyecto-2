@@ -5,10 +5,13 @@ export function geoFindMe(setUbicacion) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
+        console.log(latitude, longitude)
+
         obtenerUbicacion(latitude, longitude)
             .then((ubicacion) => {
                 if (ubicacion) {
                     setUbicacion(ubicacion);
+                    console.log(ubicacion)
                 }
             })
             .catch((error) => console.error(error));
