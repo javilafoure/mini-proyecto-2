@@ -109,7 +109,8 @@ function Main() {
                             <h3 className='font-bold text-5xl'>{ubicacion.speed}<span className='font-normal text-3xl'> ms</span></h3>
                             <div className='flex items-center gap-2'>
                                 <div className='h-8 w-8 bg-gray-600 rounded-full'>
-                                    <img className={`rotate-${ubicacion.deg} p-1`} src="navigation.svg" alt="" />
+                                    <img className='p-1'
+                                    style={{ transform: `rotate(${ubicacion.deg}deg)` }} src="navigation.svg" alt="" />
                                 </div>
                                 <span>SSE</span>
 
