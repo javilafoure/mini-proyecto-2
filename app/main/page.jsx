@@ -71,7 +71,7 @@ function Main() {
                             ºF
                         </button>
                     </div>
-                    <div className='flex flex-wrap px-16 md:px-10 gap-5 md:gap-7'>
+                    <div className='grid grid-cols-2 md:grid-cols-5 px-16 md:px-10 gap-5 md:gap-7'>
                         <div className='flex flex-col items-center text-white text-sm h-40 w-28 md:w-32 md:h-48 border shadow bg-slate-800 p-4 gap-2'>
                             <div>Dia</div>
                             <div>
