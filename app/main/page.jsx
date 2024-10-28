@@ -2,17 +2,25 @@
 import React, { useEffect, useState } from 'react'
 import Search from '../components/Search'
 import { geoFindMe } from './geolocation'
+import { obtenerUbicacion } from '@/api/ubicacion/getUbicacion'
 
 function Main() {
     const [openSearch, setOpenSearch] = useState(false)
-    const [ubicacion, setUbicacion] = useState({ ciudad: "Haga click en el boton o busque una ubicacion", pais: "" });
+    const [ubicacion, setUbicacion] = useState({ ciudad: "", pais: "" });
     const [fechaActual, setFechaActual] = useState('');
 
     useEffect(() => {
-        
-        if (typeof window !== "undefined") {
-            geoFindMe(setUbicacion);
-        }
+
+        const lat = -12.0432;
+        const lon = -77.0282;
+
+        obtenerUbicacion(lat, lon)
+            .then((ubicacion) => {
+                if (ubicacion) {
+                    setUbicacion(ubicacion);
+                }
+            })
+            .catch((error) => console.error(error));
 
         const opciones = { weekday: 'short', day: '2-digit', month: 'short' };
         const fecha = new Date().toLocaleDateString('en-US', opciones);
@@ -49,7 +57,7 @@ function Main() {
                     <div className='flex text-slate-400 text-xs'>
                         <img className='h-4' src="/location_on.svg" alt="" />
                         <h3> {ubicacion.ciudad}, {ubicacion.pais}</h3>
-                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -110,7 +118,7 @@ function Main() {
                             <div className='flex items-center gap-2'>
                                 <div className='h-8 w-8 bg-gray-600 rounded-full'>
                                     <img className='p-1'
-                                    style={{ transform: `rotate(${ubicacion.deg}deg)` }} src="navigation.svg" alt="" />
+                                        style={{ transform: `rotate(${ubicacion.deg}deg)` }} src="navigation.svg" alt="" />
                                 </div>
                                 <span>SSE</span>
 
