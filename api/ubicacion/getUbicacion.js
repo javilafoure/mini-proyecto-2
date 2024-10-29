@@ -1,6 +1,6 @@
-export async function obtenerUbicacion(lat, lon) {
+export async function obtenerUbicacion(lat, lon, unit) {
     const apiKey = 'e4b268ec0b234f5bebaccf5504e73000';
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
 
     try {
         const response = await fetch(url);

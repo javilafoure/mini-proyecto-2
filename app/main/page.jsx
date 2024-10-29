@@ -3,18 +3,20 @@ import React, { useEffect, useState } from 'react'
 import Search from '../components/Search'
 import { geoFindMe } from './geolocation'
 import { obtenerUbicacion } from '@/api/ubicacion/getUbicacion'
+import { useUnit } from './tempOpt'
 
 function Main() {
     const [openSearch, setOpenSearch] = useState(false)
     const [ubicacion, setUbicacion] = useState({ ciudad: "", pais: "" });
     const [fechaActual, setFechaActual] = useState('');
+    const { unit, handleClick } = useUnit();
 
     useEffect(() => {
 
         const lat = -12.0432;
         const lon = -77.0282;
 
-        obtenerUbicacion(lat, lon)
+        obtenerUbicacion(lat, lon, unit)
             .then((ubicacion) => {
                 if (ubicacion) {
                     setUbicacion(ubicacion);
@@ -26,7 +28,7 @@ function Main() {
         const fecha = new Date().toLocaleDateString('en-US', opciones);
         setFechaActual(fecha);
 
-    }, []);
+    }, [unit]);
 
     return (
         <div className='flex flex-col sm:flex-row w-screen h-screen'>
@@ -50,7 +52,7 @@ function Main() {
 
                     <div className='flex text-slate-400 font-bold text-5xl'>
                         <h2 className="text-white text-9xl font-medium">{ubicacion.temp}</h2>
-                        <h3 className="text-slate-400 text-7xl">°C</h3>
+                        <h3 className="text-slate-400 text-7xl">{unit === 'metric' ? '°C' : '°F'}</h3>
                     </div>
                     <div className='flex text-slate-400 font-bold text-xl'>{ubicacion.desc}</div>
                     <div className='flex text-slate-400 text-xs'>Today .{fechaActual}</div>
@@ -64,10 +66,10 @@ function Main() {
             <div className='flex flex-col md:items-center w-full md:w-[70%] min-h-screen bg-slate-950'>
                 <div className='flex flex-col w-full md:w-[65%]'>
                     <div className='flex justify-end items-center h-20 px-16 gap-4'>
-                        <button className='font-bold h-8 w-8 text-slate-950 rounded-full text-sm bg-white p-1'>
+                        <button value={'metric'} onClick={handleClick} className='font-bold h-8 w-8 text-slate-950 rounded-full text-sm bg-white p-1'>
                             ºC
                         </button>
-                        <button className='font-bold h-8 w-8 text-white rounded-full text-sm bg-slate-400 p-1'>
+                        <button value={'imperial'} onClick={handleClick} className='font-bold h-8 w-8 text-white rounded-full text-sm bg-slate-400 p-1'>
                             ºF
                         </button>
                     </div>
