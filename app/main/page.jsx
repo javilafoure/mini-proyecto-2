@@ -9,12 +9,11 @@ function Main() {
     const [openSearch, setOpenSearch] = useState(false)
     const [ubicacion, setUbicacion] = useState({ ciudad: "", pais: "" });
     const [fechaActual, setFechaActual] = useState('');
+    const [lat, setLat] = useState(-12.0432);
+    const [lon, setLon] = useState(-77.0282);
     const { unit, handleClick } = useUnit();
 
     useEffect(() => {
-
-        const lat = -12.0432;
-        const lon = -77.0282;
 
         obtenerUbicacion(lat, lon, unit)
             .then((ubicacion) => {
@@ -28,7 +27,7 @@ function Main() {
         const fecha = new Date().toLocaleDateString('en-US', opciones);
         setFechaActual(fecha);
 
-    }, [unit]);
+    }, [unit, lat, lon]);
 
     return (
         <div className='flex flex-col sm:flex-row w-screen h-screen'>
@@ -41,7 +40,7 @@ function Main() {
                     <button className='h-8 text-white text-xs bg-slate-400 px-4'
                         onClick={() => setOpenSearch(true)}
                     >Search for places</button>
-                    <button className='h-8 text-white rounded-full text-sm bg-slate-400 p-1' onClick={() => geoFindMe(setUbicacion)}>
+                    <button className='h-8 text-white rounded-full text-sm bg-slate-400 p-1' onClick={() => geoFindMe(setUbicacion, unit, setLat, setLon)}>
                         <img className="h-full w-auto" src="/location.svg" alt="" /></button>
                 </div>
                 <div className='relative'>

@@ -1,13 +1,14 @@
 import { obtenerUbicacion } from '@/api/ubicacion/getUbicacion';
 
-export function geoFindMe(setUbicacion) {
+export function geoFindMe(setUbicacion, unit, setLat, setLon) {
     function success(position) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
-        console.log(latitude, longitude)
+        setLat(latitude);
+        setLon(longitude);
 
-        obtenerUbicacion(latitude, longitude)
+        obtenerUbicacion(latitude, longitude, unit)
             .then((ubicacion) => {
                 if (ubicacion) {
                     setUbicacion(ubicacion);
