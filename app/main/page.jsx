@@ -4,6 +4,7 @@ import Search from '../components/Search'
 import { geoFindMe } from './geolocation'
 import { obtenerUbicacion } from '@/api/ubicacion/getUbicacion'
 import { useUnit } from './tempOpt'
+import Card from '../components/Card'
 
 function Main() {
     const [openSearch, setOpenSearch] = useState(false)
@@ -12,13 +13,17 @@ function Main() {
     const [lat, setLat] = useState(-12.0432);
     const [lon, setLon] = useState(-77.0282);
     const { unit, handleClick } = useUnit();
+    const [pronostico, setPronostico] = useState([]);
+
 
     useEffect(() => {
-
         obtenerUbicacion(lat, lon, unit)
             .then((ubicacion) => {
                 if (ubicacion) {
                     setUbicacion(ubicacion);
+                    if (ubicacion.pronostico) {
+                        setPronostico(ubicacion.pronostico);
+                    }
                 }
             })
             .catch((error) => console.error(error));
@@ -28,6 +33,7 @@ function Main() {
         setFechaActual(fecha);
 
     }, [unit, lat, lon]);
+
 
     return (
         <div className='flex flex-col sm:flex-row w-screen h-screen'>
@@ -73,41 +79,17 @@ function Main() {
                         </button>
                     </div>
                     <div className='grid grid-cols-2 md:grid-cols-5 px-16 md:px-10 gap-5 md:gap-7'>
-                        <div className='flex flex-col items-center text-white text-sm h-40 w-28 md:w-32 md:h-48 border shadow bg-slate-800 p-4 gap-2'>
-                            <div>Dia</div>
-                            <div>
-                                <img className='h-full w-auto' src="/weather/03d.png" alt="" />
-                            </div>
-                            <div>Temperatura</div>
-                        </div>
-                        <div className='flex flex-col items-center text-white text-sm h-40 w-28 md:w-32 md:h-48 border shadow bg-slate-800 p-4 gap-2'>
-                            <div>Dia</div>
-                            <div>
-                                <img className='h-full w-auto' src="/weather/03d.png" alt="" />
-                            </div>
-                            <div>Temperatura</div>
-                        </div>
-                        <div className='flex flex-col items-center text-white text-sm h-40 w-28 md:w-32 md:h-48 border shadow bg-slate-800 p-4 gap-2'>
-                            <div>Dia</div>
-                            <div>
-                                <img className='h-full w-auto' src="/weather/03d.png" alt="" />
-                            </div>
-                            <div>Temperatura</div>
-                        </div>
-                        <div className='flex flex-col items-center text-white text-sm h-40 w-28 md:w-32 md:h-48 border shadow bg-slate-800 p-4 gap-2'>
-                            <div>Dia</div>
-                            <div>
-                                <img className='h-full w-auto' src="/weather/03d.png" alt="" />
-                            </div>
-                            <div>Temperatura</div>
-                        </div>
-                        <div className='flex flex-col items-center text-white text-sm h-40 w-28 md:w-32 md:h-48 border shadow bg-slate-800 p-4 gap-2'>
-                            <div>Dia</div>
-                            <div>
-                                <img className='h-full w-auto' src="/weather/03d.png" alt="" />
-                            </div>
-                            <div>Temperatura</div>
-                        </div>
+                        {pronostico.map((dia, index) => (
+                            <Card
+                                key={index}
+                                day={dia.day}
+                                icon={dia.icon}
+                                temp_min={dia.temp_min}
+                                temp_max={dia.temp_max}
+                                unit={unit}
+                            />
+                        ))}
+
                     </div>
                 </div>
                 <div className='flex flex-col w-full md:w-[65%] text-white md:mt-20 py-2 px-8 gap-4 bg-slate-950'>
