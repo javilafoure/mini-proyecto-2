@@ -38,9 +38,11 @@ function Main() {
     return (
         <div className='flex flex-col sm:flex-row w-screen h-screen'>
             <div className='flex flex-col w-full md:w-[30%] min-h-screen bg-slate-800'>
-                <Search
+            <Search
                     openSearch={openSearch}
                     setOpenSearch={setOpenSearch}
+                    setLat={setLat}
+                    setLon={setLon}
                 />
                 <div className='flex justify-between items-center h-20 px-10'>
                     <button className='h-8 text-white text-xs bg-slate-400 px-4'
